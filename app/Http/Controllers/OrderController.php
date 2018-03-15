@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use JWTAuth;
 
 class OrderController extends Controller
 {
   public function getOrder()
   {
-  return Order::all();
-}
+    $user = JWTAuth::toUser();
+    //return $user['name'];
+    return $user->orders;
+  }
 
 public function insertOrder(Request $request){
   try{
+    $user = JWTAuth::toUser();
   $data = new Order();
-  $data['user_id'] = $request->input('user_id');
+  $data['user_id'] = $user['id'];//$request->input('user_id');
   $data['order_status'] = $request->input('order_status');
   $data['order_date'] = $request->input('order_date');
   $data['total_price'] = $request->input('total_price');
@@ -44,6 +48,7 @@ public function insertOrder(Request $request){
 
  public function deleteOrder(Request $request){
  try{
+   
   $task =  Order::where('id','=',$request->input('id'))->delete();
 
    if($task==0){

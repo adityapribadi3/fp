@@ -24,7 +24,7 @@ class AuthController extends Controller
             return response()->json($validator->errors());
         }
 
-        User::create([
+        $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => bcrypt($request->input('password'))
@@ -32,7 +32,7 @@ class AuthController extends Controller
 
         return response([
             'status' => 'success',
-            'data' => User::first(),
+            'data' => $user,
         ], 200);
     }
 
@@ -85,4 +85,5 @@ class AuthController extends Controller
       $user = JWTAuth::toUser();
       return response()->json($user, 200);
     }
+
 }

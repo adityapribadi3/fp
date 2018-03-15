@@ -23,6 +23,7 @@ Route::post('register', 'AuthController@register');
 Route::group(['middleware' => ['jwt.auth']], function() {
   Route::get('logout', 'AuthController@logout');
   Route::get('me', 'AuthController@me');
+  Route::get('viewo', 'OrderController@getOrder');
 });
 
 Route::get('viewua', 'UserAccountController@getUserAccount');
@@ -55,7 +56,6 @@ Route::post('insertci', 'CartItemController@insertCartItem');
 Route::delete('deleteci', 'CartItemController@deleteCartItem');
 Route::put('updateci', 'CartItemController@updateCartItem');
 
-Route::get('viewo', 'OrderController@getOrder');
 Route::post('inserto', 'OrderController@insertOrder');
 Route::delete('deleteo', 'OrderController@deleteOrder');
 Route::put('updateo', 'OrderController@updateOrder');
