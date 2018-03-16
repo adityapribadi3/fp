@@ -17,7 +17,7 @@ class OrderController extends Controller
 
 public function insertOrder(Request $request){
   try{
-    $user = JWTAuth::toUser();
+  $user = JWTAuth::toUser();
   $data = new Order();
   $data['user_id'] = $user['id'];//$request->input('user_id');
   $data['order_status'] = $request->input('order_status');
@@ -48,7 +48,7 @@ public function insertOrder(Request $request){
 
  public function deleteOrder(Request $request){
  try{
-   
+
   $task =  Order::where('id','=',$request->input('id'))->delete();
 
    if($task==0){
